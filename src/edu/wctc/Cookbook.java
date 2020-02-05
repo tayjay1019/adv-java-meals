@@ -1,9 +1,12 @@
 package edu.wctc;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Cookbook {
 
     // Hold all the meals that are read in from the file
-    private Meal[] meals = new Meal[100];
+    private ArrayList<Meal> meals = new ArrayList<>();
     // Hold the next (empty) index in the array
     private int i = 0;
 
@@ -11,7 +14,7 @@ public class Cookbook {
         MealType mealType;
 
         // Do we have room in the array for one more?
-        if (i < meals.length) {
+
 
             // Find the correct enum using a switch? Or use .fromValue() instead?
             switch (mealTypeStr) {
@@ -40,13 +43,11 @@ public class Cookbook {
                 calories = 100;
                 System.out.println("Meal Creation Error: Invalid Calories " + caloriesStr + ", defaulted to 100.");
             }
-            meals[i++] = new Meal(mealType, mealNameStr, calories);
-        } else {
-            System.out.println("Meal Creation Error: Items exceeded system size.  File has " + i + ", while the system can only handle " + meals.length + ".");
-        }
+            meals.add(new Meal(mealType, mealNameStr, calories));
+
     }
 
-    public Meal[] getMeals() {
+    public ArrayList<Meal> getMeals() {
         return meals;
     }
 
@@ -74,5 +75,60 @@ public class Cookbook {
                 System.out.println(item);
             }
         }
+    }
+
+    public void doControlBreak() {
+
+        ArrayList<Integer> medians = new ArrayList<>();
+        MealType currentType = null;
+        int totalCalorie = 0;
+        double counter = 0.0;
+        double mean = 0.0;
+        int min = 10000;
+        int max = 0;
+        int halfCount = 0;
+        for (Meal item : meals) {
+
+            if (currentType == null)
+            {
+                System.out.println("Test!");
+                currentType = item.getMealType();
+            }
+
+            if ( item.getMealType() != currentType) {
+                currentType = item.getMealType();
+                Collections.sort(medians);
+                System.out.println(totalCalorie);
+                System.out.println("counter " + counter);
+                System.out.println("mean " + mean);
+                System.out.println("Min " + min);
+                System.out.println("max " + max);
+                System.out.println("median " + medians.get((int)counter/2));
+                totalCalorie = 0;
+                counter = 0;
+                min = 10000;
+                max = 0;
+                medians = new ArrayList<>();
+            }
+            if(item.getCalories() <= min)
+            {
+                min = item.getCalories();
+            }
+            if(item.getCalories() >= max)
+            {
+                max = item.getCalories();
+            }
+            totalCalorie += item.getCalories();
+            counter ++;
+            mean = totalCalorie / counter;
+            medians.add(item.getCalories());
+        }
+        Collections.sort(medians);
+        System.out.println(totalCalorie);
+        System.out.println("counter " + counter);
+        System.out.println("mean " + mean);
+        System.out.println("Min " + min);
+        System.out.println("max " + max);
+        System.out.println("median " + medians.get((int)counter/2));
     }
 }

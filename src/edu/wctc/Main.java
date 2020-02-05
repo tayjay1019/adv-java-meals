@@ -57,7 +57,7 @@ public class Main {
                     searchByName();
                     break;
                 case "4":
-                    // doControlBreak();
+                     cookbook.doControlBreak();
                     break;
                 case "5":
                     userContinue = false;
@@ -102,4 +102,5 @@ public class Main {
         String ans = keyboard.nextLine();
         cookbook.printByNameSearch(ans);
     }
+
 }
