@@ -91,19 +91,21 @@ public class Cookbook {
 
             if (currentType == null)
             {
-                System.out.println("Test!");
+                System.out.println("Meal Type\t\tTotal\t\tMean\t\tMin\t\tMax\t\tMedian");
                 currentType = item.getMealType();
             }
 
             if ( item.getMealType() != currentType) {
+                System.out.printf(currentType + "\t\t" + totalCalorie + "\t\t" + "%.2f\t\t" + min + "\t\t" + max + "\t\t" + medians.get((int)counter/2) + "\n", mean);
                 currentType = item.getMealType();
                 Collections.sort(medians);
-                System.out.println(totalCalorie);
-                System.out.println("counter " + counter);
-                System.out.println("mean " + mean);
-                System.out.println("Min " + min);
-                System.out.println("max " + max);
-                System.out.println("median " + medians.get((int)counter/2));
+
+//                System.out.println(totalCalorie);
+//                System.out.println("counter " + counter);
+//                System.out.println("mean " + mean);
+//                System.out.println("Min " + min);
+//                System.out.println("max " + max);
+//                System.out.println("median " + medians.get((int)counter/2));
                 totalCalorie = 0;
                 counter = 0;
                 min = 10000;
@@ -124,11 +126,12 @@ public class Cookbook {
             medians.add(item.getCalories());
         }
         Collections.sort(medians);
-        System.out.println(totalCalorie);
-        System.out.println("counter " + counter);
-        System.out.println("mean " + mean);
-        System.out.println("Min " + min);
-        System.out.println("max " + max);
-        System.out.println("median " + medians.get((int)counter/2));
+        System.out.printf(currentType + "\t\t" + totalCalorie + "\t\t" + "%.2f\t\t" + min + "\t\t" + max + "\t\t" + medians.get((int)counter/2) + "\n", mean);
+        //System.out.println(totalCalorie);
+        //System.out.println("counter " + counter);
+        //System.out.println("mean " + mean);
+        //System.out.println("Min " + min);
+        //System.out.println("max " + max);
+        //System.out.println("median " + medians.get((int)counter/2));
     }
 }
